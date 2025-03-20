@@ -1,0 +1,5 @@
+To do list
+	Get more data from reference paper and AI
+	Complete report
+	Train the SOM to this specific data
+	Have AI verify the report
