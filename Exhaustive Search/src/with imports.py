@@ -1,73 +1,52 @@
-import tkinter as tk
-import json
+from itertools import permutations # Library to carry out permutations
 
-app = tk.Tk()
+# Data structure to represent the points.
+adjacency_list = {
+    1: {2: 12, 3: 10, 7: 12},
+    2: {1: 12, 3: 8, 4: 12},
+    3: {1: 10, 2: 8, 4: 11, 5: 3, 7: 9},
+    4: {2: 12, 3: 11, 5: 11, 6: 10},
+    5: {3: 3, 4: 11, 6: 6, 7: 7},
+    6: {4: 10, 5: 6, 7: 9},
+    7: {1: 12, 3: 9, 5: 7, 6: 9}
+}
 
-WIDTH = app.winfo_screenwidth()
-HEIGHT = app.winfo_screenheight()
+# Function to generate permutations.
+def generate_valid_sequences():
+    """
+    Generate all valid permutations of nodes 2-7 and prepend + append node 1
+    to ensure cycles start and end at 1. Return a list of all the permutations.
+    """
+    nodes = "234567"
+    perm_list = ['1' + ''.join(p) + '1' for p in permutations(nodes)]
+    return perm_list
 
-app.geometry(f'{WIDTH}x{HEIGHT}')
-app.title('Notes')
+sequences = generate_valid_sequences() # Assign the permutations list to sequences variable
+results = {} # Dictionary to store all the paths and their respective distances.
 
-users_file = 'Users.json'
-try:
-    with open(users_file, 'w+') as file:
-        users = json.load(file)
+# Compute distances for each valid route
+for sequence in sequences: # Repeat this block for all sequences
+    total_distance = 0 # Initialize the distance covered in the path
+    valid = True  # Track validity of the path based on adjacency
 
-except:
-    users=dict()
+    for i in range(len(sequence) - 1): # Repeat this block for all digits in a sequence
+        current_node = int(sequence[i]) # The point we are currently on
+        next_node = int(sequence[i + 1]) # The next to be visited in the sequence
 
-class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.notes = notebook.get_notes(self.username)
+        # Check if the next point is adjacent to the current point.
+        if next_node in adjacency_list[current_node]:
+            # Update the distance with distance to next point.
+            total_distance += adjacency_list[current_node][next_node]
+        else: #
+            valid = False # If the next point in the sequence is not adjacent to the current point.
+            break  # Stop checking if an invalid connection is found
 
+    if valid: # Adds sequence to valid results if it has passed all validity tests
+        results[sequence] = total_distance # The value of the sequence key is its distance travelled
 
-class Note:
-    def __int__(self, name, content, filename='', created='', edited='', author=''):
-        self.name = name
-        self.content = content
-        self.filename = filename
-        self.created = created
-        self.edited = edited
-        self.author = author
+# Find best routes
+best_route = min(results, key=results.get) # Min function to return key of minimum value in dictionary
 
-class Notebook:
-    def __init__(self, users_dictionary):
-        self.users = users_dictionary
-
-    def get_notes(self, username):
-        return self.users[username]['notes']
-
-    def create_note(self):
-        clear_frame(content_section)
-
-        name_input = tk.Entry(content_section, width=int(0.98*0.77*WIDTH))
-        name_input.place(x=0.1*0.77*WIDTH, y=10)
-
-def clear_frame(frame):
-    for widget in frame.winfo_children():
-        widget.destroy()
-
-notebook = Notebook(users)
-
-# frames
-sidebar = tk.Frame(app, width=int(0.195*WIDTH), height=int(0.935*HEIGHT), background='gray')
-sidebar.place(x=10, y=10)
-
-content_section = tk.Frame(app, width=int(0.770*WIDTH), height=int(0.935*HEIGHT), background='gray')
-content_section.place(x=int(0.215*WIDTH), y=int(0.0095*HEIGHT))
-
-#buttons
-new_note = tk.Button(sidebar, width=int(0.15*0.195*WIDTH), height=1, command=notebook.create_note)
-new_note.place(x=10, y=10)
-
-app.mainloop()
-
-
-
-
-
-
+# Print the optimal sequence (route) and its distance
+print(f"Best Route: {best_route} with distance {results[best_route]}")
 
