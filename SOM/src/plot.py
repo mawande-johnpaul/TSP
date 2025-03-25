@@ -39,6 +39,7 @@ def plot_route(cities, route, name='diagram.png', ax=None):
         route.loc[route.shape[0]] = route.iloc[0]
         axis.plot(route['x'], route['y'], color='purple', linewidth=1)
 
+
         plt.savefig(name, bbox_inches='tight', pad_inches=0, dpi=200)
         plt.close()
 

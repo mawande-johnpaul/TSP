@@ -5,6 +5,8 @@ from neuron import generate_network, get_neighborhood, get_route
 from distance import select_closest, euclidean_distance, route_distance
 from plot import plot_network, plot_route
 
+order = []
+
 def main():
     if len(argv) != 2:
         print("Correct use: python src/main.py <filename>.tsp")
@@ -42,6 +44,7 @@ def som(problem, iterations, learning_rate=0.8):
         # Choose a random city
         city = cities.sample(1)[['x', 'y']].values
         winner_idx = select_closest(network, city)
+        order.append(winner_idx)
         # Generate a filter that applies changes to the winner's gaussian
         gaussian = get_neighborhood(winner_idx, n//10, network.shape[0])
         # Update the network's weights (closer to the city)
@@ -70,6 +73,7 @@ def som(problem, iterations, learning_rate=0.8):
 
     route = get_route(cities, network)
     plot_route(cities, route, 'diagrams/route.png')
+    print(order)
     return route
 
 if __name__ == '__main__':
