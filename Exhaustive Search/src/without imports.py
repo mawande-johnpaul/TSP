@@ -55,4 +55,3 @@ best_route = min(results, key=results.get)
 worst_route = max(results, key=results.get)
 
 print(f"Best Route: {best_route} with distance {results[best_route]}")
-print(f"Worst Route: {worst_route} with distance {results[worst_route]}")
