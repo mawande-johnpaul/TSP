@@ -1,49 +1,42 @@
-# Traveling Salesman Problem (TSP)
+# Traveling Salesman Problem (TSP) Optimization Techniques
 
-This repository contains an implementation of the **Traveling Salesman Problem (TSP)** using various optimization techniques. The goal of the TSP is to find the shortest possible route that visits each city exactly once and returns to the origin city. This project includes multiple approaches to solving the problem.
+## Overview
 
-## Table of Contents
+The **Traveling Salesman Problem (TSP)** is a classic optimization problem where the goal is to find the shortest possible route that visits each city exactly once and returns to the origin city. This repository provides several methods for solving the TSP, focusing on both **Exhaustive Search** and **Self-Organizing Map (SOM)**. 
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [Algorithms Implemented](#algorithms-implemented)
-  - [Brute Force](#brute-force)
-  - [Self-Organising-Map].(#SOM)
-- [Contributing](#contributing)
-- [License](#license)
+## Problem Definition
 
-## Introduction
-
-The **Traveling Salesman Problem (TSP)** is a classic optimization problem in the field of computer science and operations research. Given a list of cities and the distances between them, the task is to find the shortest route that visits each city exactly once and returns to the origin city. This repository provides multiple methods to solve TSP, ranging from brute-force approaches to advanced heuristic and metaheuristic techniques.
+Given a set of cities and the distances between each pair of cities, the task is to determine the shortest possible route that visits every city exactly once and returns to the starting point.
 
 ## Features
 
-- Multiple TSP-solving algorithms are implemented.
-- Provides a clear demonstration of the problem and various techniques for solving it.
-- Interactive visualization for better understanding of the problem and solutions.
+- **Two Optimization Approaches**: 
+  - **Exhaustive Search**: A brute-force method that evaluates all possible routes to find the optimal solution.
+  - **Self-Organizing Map (SOM)**: A neural network approach for finding a near-optimal solution based on unsupervised learning.
+  
+- **Clear and Modular Code**: Code is structured in a way that allows easy extension and customization.
+  
+- **Visualization**: Visualize routes and compare the performance of different algorithms.
+
+- **Reports and Analysis**: Documentation to understand the outcomes of each method.
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-To run this project, you will need:
+Ensure that the following are installed on your system:
 
-- Python 3.x or higher
-- Required Python libraries:
-  - `numpy`
-  - `matplotlib`
-  - `scipy`
-  - Any other dependencies listed in `requirements.txt`
+- **Python 3.6+**
+- **Required Libraries**: All dependencies are listed in the `requirements.txt` file.
 
 ### Installation
 
-1. Clone the repository:
+Follow these steps to set up the project:
+
+1. **Clone the Repository**
 
    ```bash
    git clone https://github.com/mawande-johnpaul/TSP.git
    cd TSP
-
