@@ -9,7 +9,7 @@ order = []
 
 def main():
     if len(argv) != 2:
-        print("Correct use: python src/main.py <filename>.tsp")
+        print("Correct use: python SOM/src/main.py SOM/assets/problem-data/cities.tsp")
         return -1
 
     problem = read_tsp(argv[1])
